@@ -1,0 +1,80 @@
+---
+title: "Regresi Linear"
+author: "Almuzhidul Mujhid"
+date: "3/29/2021"
+output: html_document
+---
+
+```{r}
+if(!require(tidyverse)) install.packages("tidyverse")
+if(!require(skimr)) install.packages("skimr")
+if(!require(DataExplorer)) install.packages("DataExplorer")
+if(!require(visdat)) install.packages("visdat")
+if(!require(dplyr)) install.packages("dplyr")
+if(!require(ggplot2)) install.packages("ggplot2")
+if(!require(tidyr)) install.packages("tidyr")
+if(!require(readr)) install.packages("readr")
+if(!require(tibble)) install.packages("tibble")
+if(!require(corrplot)) install.packages("corrplot")
+library(visdat)
+library(tidyverse)
+library(skimr)
+library(DataExplorer)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(readr)
+library(tibble)
+```
+
+# Mengakses Data Set
+## Membuka data set dalam bentuk csv
+
+```{r}
+DATA  <- read.csv("https://raw.githubusercontent.com/Almuzhidul/Pusat-Studi-Data-Science-UAD/main/datacontoh.csv")
+```
+
+## Untuk Melihat 6 Data Paling atas
+```{r}
+head(DATA)
+
+```
+
+# Ekplorasi Data
+
+## Melihat Ukuran Data
+```{r}
+dim(DATA)
+
+```
+## Melihat statistik deskriptif dataset
+```{r}
+summary(DATA)
+```
+
+## Melihat distribusi kolom target(harga rumah)
+```{r}
+hist(DATA$Total.Salary)
+```
+## Melihat informasi kolom dataset
+```{r}
+str(DATA)
+```
+##Melihat nilai korelasi antar variabel numerik
+```{r}
+nums <- unlist(lapply(DATA, is.numeric))  
+DATA[ , nums]
+```
+## Korelasi Data
+```{r}
+res <- cor(DATA)
+round(res, 2)
+```
+```{r}
+corrplot(res)
+
+```
+# Data Cleaning
+
+## Kodifikasi untuk data bertipe kategori
+
